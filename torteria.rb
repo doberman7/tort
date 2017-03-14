@@ -34,8 +34,7 @@ end
 class Horno
 	attr_accessor :estado
 
-	def initialize(array_de_tortas,tiempo_en_horno)
-		@tiempo_en_horno = tiempo_en_horno
+	def initialize(array_de_tortas)
 		@array_de_tortas = array_de_tortas
 	end
 
@@ -44,8 +43,7 @@ class Horno
 	end
 	def reportear
 		hornear
-		@array_de_tortas.each do |torta|
-			#p torta.tiempo_coccion
+		@array_de_tortas.each do |torta|			
 			case
 			#when @tiempo_en_horno < torta.tiempo_coccion then p  "cruda"
 		 	when @tiempo_en_horno < torta.tiempo_coccion  then p "Torta de #{torta.tipo} casi lista"
@@ -64,5 +62,5 @@ t_tres = Tortas.new("cubana", 40)
 
 lote = [t_uno,t_dos,t_tres]# estamos en el Scope Main
 
-horno_de_gas = Horno.new(lote, 20)
+horno_de_gas = Horno.new(lote)
 horno_de_gas.reportear
