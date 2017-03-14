@@ -1,28 +1,68 @@
 =begin
 ¿Qué clases crees que sean necesarias? TORTAS HORNO
 ¿Qué atributos deben tener las clases?
-  TORTAS: TEMPERATURA SABOR ESTADO
-  HORNO: TEMEPERATURA ESPACIO
+  TORTAS: tipo tiempo
+  HORNO: tiempo
 ¿Cuál es el comportamiento necesario para cada una?
   TORTAS: cruda, casi lista, lista y quemada.
-  HORNO: aumento disminución de TEMPERATURA, LOTE del tipo X
+  HORNO: tiempo
 ¿Cómo van a interactuar las clases entre ellas?
-  Dado una TEMPERATURA en horno las TORTAS camabiaran de estado de frias a ok a quemadas
-  el  lote en horno estará lleno o con espacio dependiendo de la cantidad de tortas
+  Dado el tiempo de de cocciòn en el horno el estado de la torta cambiara
 ¿Cómo divides el código para que cada clase y método tenga una única responsabilidad?
-  en tortas, horno y lotes
+  en tortas, horno
 ¿cómo puedes hacer para meter varias tortas con tiempos diferentes de horneado?
-  antes de meter al horno
-    separar las tortas  dependiendo  del tiempo de cocción necesario para estar listas
-    asignar tortas separadas en lotes
-  ingresar al horno
+  ordenar ascendentemente las tortas dependiendo del tiempo de coccion
+	extraer en ese orden
 Implementa una manera para saber en que etapa del horneado se encuentra cada tipo de torta.
 Puedes usar los siguientes estados: crudo, casi listo, listo y quemado.
 =end
+
+=begin
+Necesita preparar diferentes tipos de tortas.
+Necesita meter las tortas por lotes al horno.
+Y lo más importante saber cuando sacarlas.
+objetivo es manipular objetos tortas
+=end
 class Tortas
+	attr_reader :tipo , :tiempo_coccion
+	def initialize(tipo, tiempo_coccion)
+		@tipo = tipo
+		@tiempo_coccion = tiempo_coccion
+	end
+end
+
+class Horno
+	attr_accessor :estado
+
+	def initialize(array_de_tortas,tiempo_en_horno)
+		@tiempo_en_horno = tiempo_en_horno
+		@array_de_tortas = array_de_tortas
+	end
+
+	def hornear
+		@tiempo_en_horno = rand(0..40)
+	end
+	def reportear
+		hornear
+		@array_de_tortas.each do |torta|
+			#p torta.tiempo_coccion
+			case
+			#when @tiempo_en_horno < torta.tiempo_coccion then p  "cruda"
+		 	when @tiempo_en_horno < torta.tiempo_coccion  then p "Torta de #{torta.tipo} casi lista"
+			when @tiempo_en_horno == torta.tiempo_coccion then p "Torta de #{torta.tipo} lista"
+			when @tiempo_en_horno > torta.tiempo_coccion then p "Torta de #{torta.tipo} quemada"
+			end
+
+		end
+	end
 
 end
-class Horno
-end
-class Lote
-end
+
+t_uno = Tortas.new("jamon", 5)
+t_dos = Tortas.new("biztec", 20)
+t_tres = Tortas.new("cubana", 40)
+
+lote = [t_uno,t_dos,t_tres]# estamos en el Scope Main
+
+horno_de_gas = Horno.new(lote, 20)
+horno_de_gas.reportear
