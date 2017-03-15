@@ -43,17 +43,20 @@ class Horno
 	end
 	def reportear
 		hornear
+		quantity_cruda = 0
+		quantity_lista = 0
+		quantity_quemada = 0
 		@array_de_tortas.each do |torta|
-			case
-			#when @tiempo_en_horno < torta.tiempo_coccion then p  "cruda"
-		 	when @tiempo_en_horno < torta.tiempo_coccion  then p "Torta de #{torta.tipo} casi lista"
-			when @tiempo_en_horno == torta.tiempo_coccion then p "Torta de #{torta.tipo} lista"
-			when @tiempo_en_horno > torta.tiempo_coccion then p "Torta de #{torta.tipo} quemada"
+		case
+			when @tiempo_en_horno < torta.tiempo_coccion  then quantity_cruda +=1    #{}"Torta de #{torta.tipo} cruda"
+			when @tiempo_en_horno == torta.tiempo_coccion then quantity_lista +=1 #p "Torta de #{torta.tipo} lista"
+			when @tiempo_en_horno > torta.tiempo_coccion then quantity_quemada +=1#p "Torta de #{torta.tipo} quemada"
 			end
-
 		end
+		p "#{quantity_cruda} crudas"
+		p "#{quantity_lista} listas"
+		p "#{quantity_quemada} quemadas"
 	end
-
 end
 
 t_uno = Tortas.new("jamon", 5)
