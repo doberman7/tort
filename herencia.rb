@@ -2,7 +2,11 @@
 Fíjate en las siguientes clases, trata de relacionarlas y crea los métodos para hacer pasar el driver code. Pon antención en el método que te pedimos en la clase 'Vehicle' el cual hará uso de la "Self keyword" que vimos anteriormente.
 =end
 class Vehicle
-	attr_reader :color, :age, :number_of_wheels
+	attr_reader :color, :age, :number_of_wheels#atributos de lectura compartidos por todos los vehiculos, no necesitan initialize
+
+	def initialize
+		@age = 10#age aqui es una variable de instancia
+	end
 
   def what_am_i?
 		self.class#el class permite que la clase sea devuelta tal cual ej: "Skateboard" en lugar de con el id del objeto "#<Skateboard:0x007fbf750f0050"
@@ -13,12 +17,12 @@ class Vehicle
     # bocho.what_am_i? => Car
   end
 
-	def age!
+	def age!#aqui age! es un metodo
 		true
 	end
 end
 class Motorized < Vehicle
-	attr_reader :has_motor, :tank_size, :refuel, :number_of_gears
+	attr_reader :has_motor, :tank_size, :refuel #atributos de lectura compartidos sòlo por los motorizados
 end
 
 class Motorbike < Motorized
@@ -30,8 +34,10 @@ class Car < Motorized
 end
 
 class Bicycle < Vehicle
-	def initialize(age)
-		@age = age
+	attr_writer :number_of_gears #
+	def initialize(number_of_gears)#initializar el atributo edad de las clases biclieta
+		@number_of_gears = number_of_gears# en el returno no se verà el numero de grars porque en: respond_to?(:number_of_gears) sòlo se pregunta la la instancia responde al atributo, no pues, leer el valor del atributo
+		@age = 5
 	end
 end
 

@@ -43,7 +43,7 @@ class Horno
 	end
 	def reportear
 		hornear
-		@array_de_tortas.each do |torta|			
+		@array_de_tortas.each do |torta|
 			case
 			#when @tiempo_en_horno < torta.tiempo_coccion then p  "cruda"
 		 	when @tiempo_en_horno < torta.tiempo_coccion  then p "Torta de #{torta.tipo} casi lista"
@@ -59,8 +59,12 @@ end
 t_uno = Tortas.new("jamon", 5)
 t_dos = Tortas.new("biztec", 20)
 t_tres = Tortas.new("cubana", 40)
-
-lote = [t_uno,t_dos,t_tres]# estamos en el Scope Main
+t_cuatro = Tortas.new("cubana", 40)
+t_5 = Tortas.new("chorizo", 12)
+t_6 = Tortas.new("talia", 17)
+t_7 = Tortas.new("salmon", 15)
+t_8 = Tortas.new("milaneza", 3)
+lote = [t_uno,t_dos,t_tres,t_cuatro, t_5, t_6, t_7, t_8]# estamos en el Scope Main
 
 horno_de_gas = Horno.new(lote)
 horno_de_gas.reportear
