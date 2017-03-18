@@ -52,32 +52,36 @@ class PersonParser
   end
   #Modifica algunas de las personas del arreglo y vuelve a salvar el archivo con estos cambios.
   def modif(file, array)
-    modifications_on_array = 0
-    p "las personas agregadas son:"
-    rand(array.length - 1).times do
-       array[rand(array.length-1)] = new_person = Person.new(Faker::Name.first_name, Faker::Name.last_name, Faker::Internet.email, Faker::PhoneNumber.phone_number, Faker::Time.backward(14, :evening))#
-      modifications_on_array +=1
-      p new_person
+    #leer el csv
+    CSV.foreach(file) do |person_in_line|
+      #p "#{person_in_line[0]}, #{person_in_line[1]}, #{person_in_line[2]}, #{person_in_line[3]}, #{person_in_line[4]}"
     end
-    p "en total se hicieron #{modifications_on_array} modificaciones al arreglo" #puede suceder que se modificque mas de una vez el mismo objeto persona, y cuente como dos cambios, esto es si el random "array[rand(array.length-1)]" valiese el mismo numero en algpun momento de la iteraciòn
-  	CSV.open(file, "w+") do |line_in_csv|#open(fd, mode="r" [, opt]) { |io| block } → obj   El "w+" es "Read-write",
-  	     array.each do |person|#itera sobre el arreglo contruido en el METODO creater_people
-  	       line_in_csv << [person.first_name, person.last_name, person.email, person.phone, person.created_at]#person es cada uno de los objetosPersona del arreglo, el ".first_name" es la atributos del objeto,
-  	     end
-  	  end
+    #encontrar personas en el arreglo
+    #serched = gets.chomp
+    #p serched
+    #array
+    array.each do |person_atributS|
+      #HACER UN CASE AQUI
+       p person_atributS.first_name
+    end
+
+    #escoger atributo
+    #modificar etributo
+    #regrasaer arreglo
+    #regrsar en CSV
+
+  	# CSV.open(file, "w+") do |line_in_csv|#open(fd, mode="r" [, opt]) { |io| block } → obj   El "w+" es "Read-write",
+  	#      array.each do |person|#itera sobre el arreglo contruido en el METODO creater_people
+  	#        line_in_csv << [person.first_name, person.last_name, person.email, person.phone, person.created_at]#person es cada uno de los objetosPersona del arreglo, el ".first_name" es la atributos del objeto,
+  	#      end
+  	#   end
   end
 end
-#leer el csv
-#hacer arreglop
-#enontrar personas
-#escoger atributo
-#modificar etributo
-#regrasaer arreglo
-#regrsar en CSV
+
 people = creater_people(10)#asignar resultado del metodo creater_people
 person_writer = PersonWriter.new("people.csv", people)# crear objetop
 person_writer.create_csv
 
 parser = PersonParser.new('people.csv')
 people = parser.people
-parser.modif("people.csv", people)
+ parser.modif("people.csv", people)
