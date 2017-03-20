@@ -55,10 +55,10 @@ class PersonParser
   #Modifica algunas de las personas del arreglo y vuelve a salvar el archivo con estos cambios.
   def modif(file, array)
     #leer el csv
-    CSV.foreach(file) do |person_in_line|
-    #  p "#{person_in_line[0]}, #{person_in_line[1]}, #{person_in_line[2]}, #{person_in_line[3]}, #{person_in_line[4]}"
-    end
-    #p "que persona buscas quieres cambiar"
+    # CSV.foreach(file) do |person_in_line|
+    #   p "#{person_in_line[0]}, #{person_in_line[1]}, #{person_in_line[2]}, #{person_in_line[3]}, #{person_in_line[4]}"
+    # end
+
     counter = 1
 
     array.each do |person_atributS|
