@@ -1,5 +1,7 @@
 require 'faker'#requerir la libreria faker, usada en METODO creater_people
 require 'csv'#requerir la libreria csv, usada en METODO create_csv
+require 'date'
+
 class Person
   attr_accessor :first_name, :last_name, :email, :phone,:created_at
   def initialize(first_name, last_name, email, phone, created_at)
@@ -92,7 +94,7 @@ class PersonParser
           when 1 then person_atributS.first_name = new_atribut
           when 2 then person_atributS.last_name = new_atribut
           when 3 then person_atributS.phone = new_atribut
-          when 4 then person_atributS.created_at = new_atribut
+          when 4 then person_atributS.created_at = new_atribut = DateTime.parse(new_atribut)
         end
         p "#{old_atribut} ha sido modificado por #{new_atribut}"
       end
